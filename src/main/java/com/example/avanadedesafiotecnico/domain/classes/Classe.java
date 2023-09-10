@@ -6,10 +6,11 @@ import lombok.*;
 @Table(name = "classe")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class Classe {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private int vida;
@@ -23,7 +24,5 @@ public class Classe {
     @Enumerated(EnumType.STRING)
     private ClasseFaccao faccao;
 
-    public Classe() {
 
-    }
 }
