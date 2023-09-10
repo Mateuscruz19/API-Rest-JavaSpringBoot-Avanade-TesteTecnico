@@ -7,5 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PersonagemRepository extends JpaRepository<Personagem, Long> {
+       List<Personagem> createPersonagem();
+       Optional<Personagem> findPersonagemById(Long id);
        List<Personagem> findAllPersonagem();
+       Optional<Personagem> deletePersonagem();
+       Optional<Personagem> updatePersonagem();
 }
