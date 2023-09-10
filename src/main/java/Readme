@@ -14,7 +14,7 @@ Se um personagem ficar com PV igual ou abaixo de zero então o oponente será o 
 O dano causado por um ataque depende da força do atacante e da defesa do defensor, enquanto o dano
 recebido depende da força do atacante e da resistência do defensor e da eficácia de sua defesa;
 Banco de Dados Postgres;
-Necessário criar o CRUD (Create, Read, Update e Delete) de cadastro de com.example.avanadedesafiotecnico.DTOS.Personagem;
+Necessário criar o CRUD (Create, Read, Update e Delete) de cadastro de com.example.avanadedesafiotecnico.domain.personagem.Personagem;
 Personagens
 Heróis Vida Força Defesa Agilidade Quantidade de
 dados
@@ -84,7 +84,7 @@ Você é livre para criar os endpoints, porém esperamos ao menos alguns deles, 
 → ataque
 → defesa
 → cálculo do dano
-→ todos referentes ao CRUD de com.example.avanadedesafiotecnico.DTOS.Personagem (Create, Read, Update e Delete)
+→ todos referentes ao CRUD de com.example.avanadedesafiotecnico.domain.personagem.Personagem (Create, Read, Update e Delete)
 → histórico
 8) Enviar para avaliação
 Você precisará subir o código para seu GitHub e logo após preencher o formulário clicando aqui
