@@ -7,6 +7,7 @@ CREATE TYPE classe_type AS ENUM (
     'LOBISOMEN'
 );
 
+
 CREATE TYPE classe_faccao AS ENUM (
     'HEROI',
     'MONSTRO'
@@ -19,8 +20,8 @@ CREATE TABLE classe (
       forca INT,
       defesa INT,
       agilidade INT,
-      quantidadeDados INT,
-      facesDoDado INT,
+      quantidade_dados INT,
+      faces_do_dado INT,
       tipo classe_type,
       faccao classe_faccao
 );
