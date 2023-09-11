@@ -1,11 +1,12 @@
 package com.example.avanadedesafiotecnico.domain.personagem;
 
-import com.example.avanadedesafiotecnico.domain.personagem.PersonagemType;
+
+import com.example.avanadedesafiotecnico.domain.classes.Classe;
+import com.example.avanadedesafiotecnico.domain.classes.ClasseType;
 import jakarta.persistence.*;
 import lombok.*;
-
-@Entity(name = "personagems")
-@Table(name = "personagems")
+@Entity(name = "personagens")
+@Table(name = "personagens")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(of="id")
@@ -14,15 +15,8 @@ public class Personagem {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private int vida;
-    private int forca;
-    private int defesa;
-    private int agilidade;
-    private int quantidadeDados;
-    private int facesDoDado;
     @Enumerated(EnumType.STRING)
-    private PersonagemType tipo;
-
+    private ClasseType classe;
     public Personagem() {
 
     }
