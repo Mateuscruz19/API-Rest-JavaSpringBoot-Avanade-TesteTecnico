@@ -1,4 +1,4 @@
-package com.example.avanadedesafiotecnico.domain;
+package com.example.avanadedesafiotecnico.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,14 +12,12 @@ public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private int vida;
-    private int forca;
-    private int defesa;
-    private int agilidade;
-    private int quantidadeDados;
-    private int facesDoDado;
-    private int type;
+    @Enumerated(EnumType.STRING)
+    private ClassType type;
+    private int life;
+    private int strength;
+    private int defense;
+    private int agility;
+    private int quantity_data;
+    private int data_faces;
 }
-
-

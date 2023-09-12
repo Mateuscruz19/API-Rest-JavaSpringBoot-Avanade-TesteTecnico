@@ -1,4 +1,4 @@
-package com.example.avanadedesafiotecnico.domain;
+package com.example.avanadedesafiotecnico.entities;
 
 public enum ClassType {
     GUERREIRO,
