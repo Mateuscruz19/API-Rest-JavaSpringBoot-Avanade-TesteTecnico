@@ -1,4 +1,4 @@
 package com.example.avanadedesafiotecnico.services;
 
-public class PersonagemService {
+public class CharacterService {
 }

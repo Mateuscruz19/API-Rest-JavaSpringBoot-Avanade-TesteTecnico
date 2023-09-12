@@ -1,14 +1,14 @@
-package com.example.avanadedesafiotecnico.domain.classes;
+package com.example.avanadedesafiotecnico.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "classes")
-@Table(name = "classe")
+@Entity(name = "class")
+@Table(name = "class")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Classe {
+public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +19,7 @@ public class Classe {
     private int agilidade;
     private int quantidadeDados;
     private int facesDoDado;
-    @Enumerated(EnumType.STRING)
-    private ClasseType tipo;
-    @Enumerated(EnumType.STRING)
-    private ClasseFaccao faccao;
-
-
+    private int type;
 }
+
+
