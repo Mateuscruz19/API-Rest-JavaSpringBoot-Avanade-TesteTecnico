@@ -16,7 +16,7 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int class_id;
+    private long class_id;
 
 }
 

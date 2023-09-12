@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CharacterRequest{
     private String name;
-    private int class_id;
+    private long class_id;
 }
 
 //public record CharacterRequestDTO(
