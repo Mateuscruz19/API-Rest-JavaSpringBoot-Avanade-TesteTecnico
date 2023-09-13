@@ -1,11 +1,8 @@
 package com.example.avanadedesafiotecnico.repositories;
 
-
-import com.example.avanadedesafiotecnico.entities.Class;
+import com.example.avanadedesafiotecnico.entities.Battle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClassRepository extends JpaRepository<Class, Long> {
-
-}
+public interface BattleRepository extends JpaRepository<Battle, Long> {}
