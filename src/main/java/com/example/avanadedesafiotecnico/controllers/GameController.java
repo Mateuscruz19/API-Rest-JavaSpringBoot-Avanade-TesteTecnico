@@ -20,4 +20,16 @@ public class GameController {
     public void startGame() {
         System.out.println("Game started");
     }
+    @PostMapping("/attack")
+    public void attack() {
+        System.out.println("Attack");
+    }
+    @PostMapping("/defense")
+    public void defense() {
+        System.out.println("Defense");
+    }
+    @PostMapping("/damageCalculation")
+    public void damageCalculation() {
+        System.out.println("Damage Calculation");
+    }
 }
