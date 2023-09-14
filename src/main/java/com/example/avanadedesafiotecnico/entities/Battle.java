@@ -25,6 +25,7 @@ public class Battle {
     private int atual_defense_number;
     private int turn;
     private String who_turn;
+    private String who_damage;
     private String turn_type;
     private String status;
 }
