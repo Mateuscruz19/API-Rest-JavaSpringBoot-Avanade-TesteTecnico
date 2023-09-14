@@ -1,6 +1,7 @@
 package com.example.avanadedesafiotecnico.controllers;
 
 import com.example.avanadedesafiotecnico.entities.Battle;
+import com.example.avanadedesafiotecnico.payloads.response.AttackResponse;
 import com.example.avanadedesafiotecnico.payloads.response.StartBattleResponse;
 import com.example.avanadedesafiotecnico.repositories.BattleRepository;
 import com.example.avanadedesafiotecnico.repositories.CharacterRepository;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 
 @RestController
@@ -68,12 +71,14 @@ public class GameController {
         battle.setWho_starts(starter);
         battle.setTurn(1);
         battle.setStatus("EM_ANDAMENTO");
-
+        battle.setTurn_type("ATAQUE");
+        battle.setAtual_attack_number(0);
+        battle.setAtual_defense_number(0);
 
         if(starter == "INIMIGO") {
-            battle.setTurn_type("DEFESA");
+            battle.setWho_turn("INIMIGO");
         } else {
-            battle.setTurn_type("ATAQUE");
+            battle.setWho_turn("ALIADO");
         }
         try {
             battleRepository.save(battle);
@@ -90,24 +95,72 @@ public class GameController {
         }
     }
 
-    @PostMapping("/attack")
-    public ResponseEntity<String> attack(@RequestParam("attackerId") Long attackerId, @RequestParam("defenderId") Long defenderId) {
-        // Implemente a lógica de ataque aqui com base nos IDs dos personagens envolvidos.
-        // Calcule o resultado do ataque de acordo com as regras do jogo.
-        // Atualize os Pontos de Vida (PV) do defensor e registre o resultado no histórico.
-        return ResponseEntity.ok("Attack");
+    @PostMapping("/attack/{id}")
+    public ResponseEntity attack(@PathVariable Long id) {
+        var battle = battleRepository.findById(id);
+
+        if (battle.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Batalha nao encontrada!");
+        }
+
+        var battleOptional = battle.get();
+
+        if ("DEFESA".equals(battleOptional.getTurn_type())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao e o round de ataque!");
+        }
+
+        int attackDice = (int) (Math.random() * 12) + 1;
+
+        Long character;
+        if ("ALIADO".equals(battleOptional.getWho_turn())) {
+            character = battleOptional.getCharacter_id();
+        } else {
+            character = battleOptional.getMonster_id();
+        }
+
+        Long classId = characterRepository.findById(character).get().getClass_id();
+        int characterStrangth = classRepository.findById(classId).get().getStrength();
+        int characterAgility = classRepository.findById(classId).get().getAgility();
+        int atual_attack_number = attackDice + characterStrangth + characterAgility;
+
+        battleOptional.setAtual_attack_number(atual_attack_number);
+        battleOptional.setTurn_type("DEFESA");
+
+        if ("ALIADO".equals(battleOptional.getWho_turn())) {
+            battleOptional.setWho_turn("INIMIGO");
+        } else {
+            battleOptional.setWho_turn("ALIADO");
+        }
+
+        try {
+            battleRepository.save(battleOptional);
+            var response = new AttackResponse();
+            response.setMessage("O dado de ataque ficou em: " + atual_attack_number + " agora e a vez do " + battleOptional.getWho_turn() + " defender!");
+            response.setBattle(battleOptional);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao atacar, tente novamente.");
+        }
     }
 
-    @PostMapping("/defense")
-    public ResponseEntity<String> defense(@RequestParam("defenderId") Long defenderId) {
-        // Implemente a lógica de defesa aqui com base no ID do personagem defensor.
-        // Calcule a defesa do defensor de acordo com as regras do jogo.
-        // Registre o resultado da defesa no histórico.
-        return ResponseEntity.ok("Defense");
-    }
 
+    @PostMapping("/defense/{id}")
+    public ResponseEntity defense(@PathVariable Long id) {
+        var battle = battleRepository.findById(id);
+
+        if (battle.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Batalha nao encontrada!");
+        }
+
+        var battleOptional = battle.get();
+
+        if (Objects.equals(battleOptional.getWho_turn(), "ATAQUE") || Objects.equals(battleOptional.getTurn_type(), "DANO")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao e o round de defesa!");
+        }
+            return ResponseEntity.ok("Defense");
+    }
     @PostMapping("/damageCalculation")
-    public ResponseEntity<String> damageCalculation(@RequestParam("attackerId") Long attackerId, @RequestParam("defenderId") Long defenderId) {
+    public ResponseEntity damageCalculation(@RequestParam("attackerId") Long attackerId, @RequestParam("defenderId") Long defenderId) {
         // Implemente o cálculo de dano com base nos IDs dos personagens envolvidos.
         // Calcule o dano de acordo com as regras do jogo.
         // Atualize os Pontos de Vida (PV) do defensor e registre o resultado no histórico.

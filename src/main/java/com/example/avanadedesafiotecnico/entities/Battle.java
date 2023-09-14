@@ -21,7 +21,10 @@ public class Battle {
     private int character_life;
     private int  enemy_life;
     private String who_starts;
+    private int atual_attack_number;
+    private int atual_defense_number;
     private int turn;
+    private String who_turn;
     private String turn_type;
     private String status;
 }
