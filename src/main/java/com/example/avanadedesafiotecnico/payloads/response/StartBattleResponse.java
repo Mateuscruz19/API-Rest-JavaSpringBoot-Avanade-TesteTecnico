@@ -8,5 +8,5 @@ public class StartBattleResponse {
     private int userDiceResult;
     private int enemyDiceResult;
     private String message;
-//    private Battle battle;
+    private Battle battle;
 }

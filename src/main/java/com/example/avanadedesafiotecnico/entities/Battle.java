@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "battles")
-@Table(name = "battles")
+@Entity(name = "battle")
+@Table(name = "battle")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,14 +18,10 @@ public class Battle {
     private Long id;
     private Long character_id;
     private Long monster_id;
-    private int characterLife;
-    private int enemyLife;
-    @Enumerated(EnumType.STRING)
-    private Fighters whoStarts;
+    private int character_life;
+    private int  enemy_life;
+    private String who_starts;
     private int turn;
-    @Enumerated(EnumType.STRING)
-    private Turn_type turn_type;
-    @Enumerated(EnumType.STRING)
-    private Battle_result result;
-
+    private String turn_type;
+    private String status;
 }
