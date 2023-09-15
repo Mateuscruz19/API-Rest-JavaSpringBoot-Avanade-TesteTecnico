@@ -17,10 +17,7 @@ public class Turn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "battle_id", referencedColumnName = "id", nullable = false)
-    private Battle battle;
-    @Column(name = "turn", nullable = false)
+    @Column(name = "turn_number", nullable = false)
     private int turnNumber;
     @Column(name = "character_life", nullable = false)
     private int characterLife;

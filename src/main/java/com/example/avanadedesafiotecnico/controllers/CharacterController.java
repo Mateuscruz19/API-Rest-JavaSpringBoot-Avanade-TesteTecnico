@@ -13,17 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/character")
 public class CharacterController {
-    @Autowired
-    private CharacterRepository characterRepository;
+    private final CharacterRepository characterRepository;
+    private final ClassRepository classRepository;
 
     @Autowired
-    private ClassRepository classRepository;
-    @GetMapping
-    public ResponseEntity findAllCharacters() {
-        var allPersonagem = characterRepository.findAll();
-        return ResponseEntity.ok(allPersonagem);
+    public CharacterController(CharacterRepository characterRepository, ClassRepository classRepository) {
+        this.characterRepository = characterRepository;
+        this.classRepository = classRepository;
     }
-
     @GetMapping("/{id}")
     public ResponseEntity findCharacterById(@PathVariable Long id) {
         var character = characterRepository.findById(id);

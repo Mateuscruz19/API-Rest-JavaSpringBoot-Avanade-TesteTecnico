@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class BattleResponseDTO {
-    String message;
-    Turn turn;
+    private String message;
+    private Battle battle;
 }

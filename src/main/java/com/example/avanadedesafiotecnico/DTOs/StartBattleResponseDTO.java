@@ -9,5 +9,5 @@ public class StartBattleResponseDTO {
     private int userDiceResult;
     private int enemyDiceResult;
     private String message;
-    private Turn turn;
+    private Battle battle;
 }
