@@ -1,7 +1,7 @@
 package com.example.avanadedesafiotecnico.controllers;
 import com.example.avanadedesafiotecnico.entities.Character;
-import com.example.avanadedesafiotecnico.payloads.request.CharacterRequest;
-import com.example.avanadedesafiotecnico.payloads.response.CreateCharacterResponse;
+import com.example.avanadedesafiotecnico.DTOs.CharacterRequestDTO;
+import com.example.avanadedesafiotecnico.DTOs.CreateCharacterResponseDTO;
 import com.example.avanadedesafiotecnico.repositories.CharacterRepository;
 import com.example.avanadedesafiotecnico.repositories.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class CharacterController {
     }
 
     @PostMapping
-    public ResponseEntity createCharacter(@RequestBody CharacterRequest characterRequest) {
+    public ResponseEntity createCharacter(@RequestBody CharacterRequestDTO characterRequest) {
        var classExists = classRepository.findById(characterRequest.getClass_id());
 
        if (classExists.isEmpty()) {
@@ -51,7 +51,7 @@ public class CharacterController {
            character.setClass_id(characterRequest.getClass_id());
            characterRepository.save(character);
 
-           var response = new CreateCharacterResponse();
+           var response = new CreateCharacterResponseDTO();
            response.setMessage("Personagem criado com sucesso!");
            response.setCharacter(character);
 
@@ -85,7 +85,7 @@ public class CharacterController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateCharacters(@PathVariable Long id, @RequestBody CharacterRequest characterRequestDTO) {
+    public ResponseEntity updateCharacters(@PathVariable Long id, @RequestBody CharacterRequestDTO characterRequestDTO) {
         var characterExists = characterRepository.findById(id);
         if (characterExists.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Esse Id nao pertence a nenhum personagem!");
@@ -100,7 +100,7 @@ public class CharacterController {
             characterExists.get().setClass_id(characterRequestDTO.getClass_id());
             characterRepository.save(characterExists.get());
 
-            var response = new CreateCharacterResponse();
+            var response = new CreateCharacterResponseDTO();
             response.setMessage("Personagem atualizado com sucesso!");
             response.setCharacter(characterExists.get());
 

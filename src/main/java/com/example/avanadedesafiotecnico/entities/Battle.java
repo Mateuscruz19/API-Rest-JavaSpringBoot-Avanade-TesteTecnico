@@ -16,16 +16,14 @@ public class Battle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long character_id;
-    private Long monster_id;
-    private int character_life;
-    private int  enemy_life;
-    private String who_starts;
-    private int atual_attack_number;
-    private int atual_defense_number;
+    @Column(name = "character_id", nullable = false)
+    private Long characterId;
+    @Column(name = "monster_id", nullable = false)
+    private Long monsterId;
+    @Column(name = "who_starts", nullable = false, length = 10)
+    private int whoStarts;
+    @Column(name = "turn", nullable = false)
     private int turn;
-    private String who_turn;
-    private String who_damage;
-    private String turn_type;
-    private String status;
+    @Column(name = "status", length = 15, columnDefinition = "VARCHAR(15) DEFAULT 'EM_ANDAMENTO'")
+    private int status;
 }
