@@ -52,15 +52,15 @@ OBS2: Realize as migrations antes de iniciar a aplicação.
 
     POST /game/attack/{id}
     -Realiza um ataque da batalha especificada se existir.
-    OBS(VOCE BATALHA COM O ID DA BATALHA E NAO DO PERSONAGEM)
+    OBS(VOCE BATALHA COM O ID DO TURNO E NAO DO PERSONAGEM)
 
     POST /game/defense/{id}
     -Realiza uma defesa da batalha especificada se existir.
-    OBS(VOCE BATALHA COM O ID DA BATALHA E NAO DO PERSONAGEM)
+    OBS(VOCE BATALHA COM O ID DO TURNO E NAO DO PERSONAGEM)
 
     POST /game/damage/{id}
     -Calcula o dano do round da batalha especificada se existir.
-    OBS(VOCE BATALHA COM O ID DA BATALHA E NAO DO PERSONAGEM)
+    OBS(VOCE BATALHA COM O ID DO TURNO E NAO DO PERSONAGEM)
 
 
     GET /history/battles
