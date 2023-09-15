@@ -11,8 +11,6 @@ CREATE TABLE battle (
 
 
 SELECT * FROM battle;
-DROP TABLE battle;
-DROP TABLE turn;
 
 
 
