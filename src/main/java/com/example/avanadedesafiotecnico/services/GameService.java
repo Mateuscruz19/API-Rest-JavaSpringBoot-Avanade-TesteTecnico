@@ -98,24 +98,18 @@ public class GameService {
     }
 
     public ResponseEntity attack(Long id) {
-        var battle = battleRepository.findById(id);
+        var turnClass = turnRepository.findById(id);
+        var battle = turnClass.get().getBattle();
 
-        if (battle.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Batalha nao encontrada!");
-        }
-
-        if(battle.get().getStatus() == 2){
+        if(battle.getStatus() == 2){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A batalha ja foi finalizada!");
         }
 
-        Battle battleOptional = battle.get();
-        Turn turnOptional = turnRepository.findById(id).get();
+        Battle battleOptional = battle;
+
+        Turn turnOptional = turnClass.get();
 
         Turn turn = new Turn();
-
-        if(turnOptional.getTurnType() != 1 ){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao estamos no round de ataque!");
-        }
 
         int attackDice = (int) (Math.random() * 12) + 1;
 
@@ -163,24 +157,18 @@ public class GameService {
     }
 
     public ResponseEntity defense(Long id) {
-        var battle = battleRepository.findById(id);
+        var turnClass = turnRepository.findById(id);
+        var battle = turnClass.get().getBattle();
 
-        if (battle.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Batalha nao encontrada!");
-        }
-
-        if(battle.get().getStatus() == 2){
+        if(battle.getStatus() == 2){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A batalha ja foi finalizada!");
         }
 
-        Battle battleOptional = battle.get();
-        Turn turnOptional = turnRepository.findById(id).get();
+        Battle battleOptional = battle;
+
+        Turn turnOptional = turnClass.get();
+
         Turn turn = new Turn();
-
-        if (turnOptional.getTurnType() != 2) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao estamos no round de defesa!");
-        }
-
 
         int defenseDice = (int) (Math.random() * 12) + 1;
 
@@ -228,11 +216,7 @@ public class GameService {
             return ResponseEntity.ok(response);
         }
 
-        turn.setEnemyLife(turnOptional.getEnemyLife());
-        turn.setCharacterLife(turnOptional.getCharacterLife());
-        turn.setTurnNumber(battleOptional.getTurn());
-        turn.setWhoDamage(turnOptional.getWhoTurn());
-        turn.setBattle(battleOptional);
+
 
         try {
             battleRepository.save(battleOptional);
@@ -253,23 +237,18 @@ public class GameService {
     }
 
     public ResponseEntity calculateDamage(Long id) {
-        var battle = battleRepository.findById(id);
+        var turnClass = turnRepository.findById(id);
+        var battle = turnClass.get().getBattle();
 
-        if (battle.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Batalha não encontrada!");
-        }
-
-        if(battle.get().getStatus() == 2){
+        if(battle.getStatus() == 2){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A batalha ja foi finalizada!");
         }
 
-        Battle battleOptional = battle.get();
+        Battle battleOptional = battle;
+
+        Turn turnOptional = turnClass.get();
+
         Turn turn = new Turn();
-
-
-        if (turn.getTurnType() != 3) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao estamos no round de dano!");
-        }
 
 
         Long characterId;
