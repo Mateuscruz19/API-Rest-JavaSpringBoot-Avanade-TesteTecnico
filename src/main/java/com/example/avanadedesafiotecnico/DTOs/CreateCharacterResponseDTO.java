@@ -1,10 +1,10 @@
-package com.example.avanadedesafiotecnico.payloads.response;
+package com.example.avanadedesafiotecnico.DTOs;
 
 import com.example.avanadedesafiotecnico.entities.Character;
 import lombok.Data;
 
 @Data
-public class CreateCharacterResponse {
+public class CreateCharacterResponseDTO {
     private String message;
     private Character character;
 }

@@ -1,12 +1,13 @@
-package com.example.avanadedesafiotecnico.payloads.response;
+package com.example.avanadedesafiotecnico.DTOs;
 
 import com.example.avanadedesafiotecnico.entities.Battle;
+import com.example.avanadedesafiotecnico.entities.Turn;
 import lombok.Data;
 
 @Data
-public class StartBattleResponse {
+public class StartBattleResponseDTO {
     private int userDiceResult;
     private int enemyDiceResult;
     private String message;
-    private Battle battle;
+    private Turn turn;
 }

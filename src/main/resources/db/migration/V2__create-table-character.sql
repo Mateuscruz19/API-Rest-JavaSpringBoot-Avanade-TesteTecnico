@@ -6,8 +6,5 @@ CREATE TABLE character (
 
 insert into character (name, class_id) values ('Rei Orc', 4);
 
-insert into character (name, class_id) values ('Gandalf', 1);
-
 SELECT * FROM character;
 
-DROP TABLE character;

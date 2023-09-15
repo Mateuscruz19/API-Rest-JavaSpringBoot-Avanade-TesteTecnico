@@ -1,11 +1,11 @@
-package com.example.avanadedesafiotecnico.payloads.request;
+package com.example.avanadedesafiotecnico.DTOs;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-public class CharacterRequest{
+public class CharacterRequestDTO {
     private String name;
     private long class_id;
 }
