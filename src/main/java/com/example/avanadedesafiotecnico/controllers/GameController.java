@@ -46,15 +46,15 @@ public class GameController {
     }
 
 
-    @PostMapping("/defense/{id}")
-    public ResponseEntity defense(@PathVariable Long id) {
-    return gameService.defense(id);
-    }
-
-    @PostMapping("/damage/{id}")
-    public ResponseEntity calculateDamage(@PathVariable Long id) {
-        return gameService.calculateDamage(id);
-    }
+//    @PostMapping("/defense/{id}")
+//    public ResponseEntity defense(@PathVariable Long id) {
+//    return gameService.defense(id);
+//    }
+//
+//    @PostMapping("/damage/{id}")
+//    public ResponseEntity calculateDamage(@PathVariable Long id) {
+//        return gameService.calculateDamage(id);
+//    }
 
 }
 

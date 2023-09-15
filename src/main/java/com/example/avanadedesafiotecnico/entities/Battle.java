@@ -22,8 +22,12 @@ public class Battle {
     private Long monsterId;
     @Column(name = "who_starts", nullable = false, length = 10)
     private int whoStarts;
-    @Column(name = "turn", nullable = false)
-    private int turn;
+    @Column(name = "turn_number", nullable = false)
+    private int turnNumber;
     @Column(name = "status", length = 15, columnDefinition = "VARCHAR(15) DEFAULT 'EM_ANDAMENTO'")
     private int status;
+    @ManyToOne
+    @JoinColumn(name = "turn_id", referencedColumnName = "id", nullable = false)
+    private Turn turn;
+
 }
